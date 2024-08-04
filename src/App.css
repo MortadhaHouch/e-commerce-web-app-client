@@ -1,0 +1,940 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: 0.25s;
+}
+:root{
+  --main-width:100vw;
+  --main-height:100vh;
+  --logo-width:50px;
+  --logo-height:50px;
+  --color-facebook:rgb(59, 89, 152);
+  --color-reddit:rgb(255, 69, 0);
+  --color-twitter:rgb(0,0,0);
+  --color-instagram:rgb(255, 148, 232);
+  --color-tiktok:rgb(1, 1, 1);
+  --color-whatsapp:rgb(7, 94, 84);
+  --main-color:#0d6efd;
+  --selection-background-color:rgba(13, 109, 253, 0.5);
+}
+*::selection{
+  background-color:var(--selection-background-color);
+  backdrop-filter: blur(20px);
+}
+*::-webkit-scrollbar{
+  width: 10px;
+}
+*::-webkit-scrollbar-track{
+  border-radius: 4px;
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb{
+  width: 8px;
+  background-color: #9e5eff;
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:active{
+  background-color: #270061;
+}
+html{
+  scroll-behavior: smooth;
+}
+body{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: hidden;
+  position: relative;
+}
+#root{
+  width: var(--main-width);
+  height: fit-content;
+  min-height: var(--main-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+header div img.logo{
+  width: var(--logo-width);
+  height: var(--logo-height);
+}
+header div h1{
+  color: #401F71;
+}
+header nav div ul .nav-item{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header nav div ul li.nav-item a.nav-link{
+  position: relative;
+  color: rgba(64, 31, 113, 0.75);
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header nav div ul li.nav-item::before{
+  position: absolute;
+  content: "";
+  bottom: 5px;
+  left: 0;
+  width: 0;
+  background-color: rgba(0, 142, 218, 0.75);
+  height: 5px;
+}
+header nav div ul .nav-item:hover::before{
+  width: 100%;
+  transition:width .25s;
+}
+header nav div ul .nav-item a.nav-link.active{
+  border-bottom: 5px solid #008DDA;
+  color: rgba(64, 31, 113, 0.75);
+}
+header div a svg path.cls-1:not(.active){
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+header div a svg path.cls-1.active{
+  stroke-dashoffset: 0;
+  transition:stroke-dashoffset 5s;
+}
+ul.aside{
+  position: fixed;
+  top: 0px;
+  left: -250px;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 250px;
+  height: 100vh;
+  z-index: 10;
+  gap: 0;
+  background-color: rgba(108, 108, 108, 0.5);
+  backdrop-filter: blur(10px);
+}
+ul.aside.shown{
+  left: 0;
+}
+ul.aside:not(.shown){
+  left: -250px;
+}
+ul.aside.vertical button.tooltip-arrow{
+  position: absolute;
+  top: 100px;
+  right: -50px;
+}
+ul.aside.vertical button.tooltip-arrow{
+  position: absolute;
+  top: 100px;
+  right: -50px;
+}
+ul.aside.vertical li{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+ul.aside.vertical li:hover{
+  padding-left: 20px;
+}
+ul.aside.vertical li button{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+ul.aside.vertical li button.active{
+  border-radius: 20px 0 0 20px;
+}
+ul.aside.vertical li:has(button.active)::before {
+  position: absolute;
+  top: -30px;
+  right: 0px;
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 15px 15px 0px 0px white;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+ul.aside.vertical li:has(button.active)::after{
+  position: absolute;
+  bottom: -30px;
+  right: 0px;
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 15px -15px 0px 0px white;
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+ul.nav.horizontal li.nav-item button.nav-link.active{
+  transform: translateY(-10px);
+  border-radius: 15px;
+}
+main{
+  padding-block: 100px;
+  width: var(--main-width);
+  height: fit-content;
+  min-height: var(--main-height);
+  background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+main form{
+  backdrop-filter: blur(5px);
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  border-radius: 15px;
+  padding: 15px;
+}
+main form div textarea{
+  resize: none;
+  opacity: .95;
+}
+div.loading{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+div.loading div{
+  width: 300px;
+  height: 300px;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-duration: 7.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.loading div span{
+  width: 30px;
+  height: 10px;
+  position: absolute;
+}
+@keyframes rotate{
+  0%{
+      transform:rotateZ(0deg);
+  }
+  0%{
+      transform:rotateZ(360deg);
+  }
+}
+div.loading div.circle{
+  margin-right: -10px;
+}
+main div.tab-content div.tab-pane{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+}
+main div.tab-content div.tab-pane div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  border-radius: 15px;
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+  cursor: pointer;
+}
+main div.tab-content div.tab-pane div img{
+  width: 100%;
+  height: 100%;
+}
+main div.tab-content div.tab-pane div svg{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 50%;
+  stroke-width: 2px;
+}
+main div.tab-content div.tab-pane div svg:hover{
+  background-color: aliceblue;
+  stroke: magenta;
+}
+main div.tab-content div.tab-pane div:hover img{
+  transform: scale(1.1);
+  transition-timing-function: ease-in-out;
+  transition: 1s;
+}
+main.home{
+  width: 100vw;
+  min-height: 100vh;
+  height:fit-content;
+  gap: 30px;
+}
+main.home section{
+  width: 100vw;
+  height:100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main.home section:first-child video{
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+main.home section:first-child div{
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  border-top: 3px solid white;
+  border-right: 3px solid white;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  backdrop-filter: blur(30px);
+}
+main.home section:first-child div p{
+  font-weight: 600;
+  font-size: 25px;
+  color: white;
+}
+main.home section:first-child div div{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  position: absolute;
+  top:80%;
+  padding: 3px;
+}
+main.home section:first-child div div::before{
+  position: absolute;
+  content: "";
+  inset: auto;
+  width: 150%;
+  height: 50%;
+  background: linear-gradient(180deg,transparent,white,transparent);
+  z-index: 5;
+  animation-name:rotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+@keyframes rotation{
+  0%{
+      transform: rotateZ(0deg);
+  }
+  100%{
+      transform: rotateZ(360deg);
+  }
+}
+main.home section:first-child div div button{
+  padding: 15px 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+  z-index: 10;
+  border: none;
+}
+main ul{
+  gap: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main ul li button.nav-link{
+  transform: translateY(0);
+  width: 100%;
+}
+div.swiper{
+  position: relative;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+img.background{
+  width: 100vw;
+  height: 100vh;
+  filter: blur(10px);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+div:has(div.description){
+  position: relative;
+  overflow: hidden;
+}
+div:has(div.description) div.description{
+  position: absolute;
+  bottom: 0;
+  left: auto;
+  width: 450px;
+  height:fit-content;
+  background: linear-gradient(180deg,transparent,rgba(0, 0, 0, 0.75));
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  z-index: 10;
+}
+div:has(div.description) div.destination-map{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  opacity: 0;
+  filter: blur(15px);
+  backdrop-filter: blur(20px);
+  z-index: 5;
+}
+div:has(div.description) div.destination-map:hover{
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(.8);
+}
+div:has(div.description) div.destination-map svg path{
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+div:has(div.description) div.destination-map svg:hover path{
+  stroke-dashoffset: 0;
+  transition-duration: 5s;
+}
+div:has(div.description) div.destination-map svg:hover path.active-path{
+  animation-name: isHovering;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+@keyframes isHovering {
+  0%{
+      fill: transparent;
+  }
+  100%{
+      fill: #0d6efd;
+  }
+}
+img.image-slide{
+  width: 450px;
+  aspect-ratio: 1;
+} 
+div.navigation-button{
+  position: absolute;
+  bottom: 20px;
+  left: auto;
+  right: auto;
+  z-index: 10;
+  gap: 10px;
+}
+div.navigation-button button{
+  border: none;
+  background-color: rgb(119, 0, 255);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.navigation-button button:disabled{
+  background-color: rgba(119, 0, 255, 0.4);
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(247, 238, 221, 0.5);
+  backdrop-filter: blur(10px);
+}
+svg{
+  cursor: grab;
+}
+button svg{
+  cursor: pointer;
+}
+svg path{
+  cursor: pointer;
+}
+section.cards-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+section.cards-container div.trip-details-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px;
+  width: 300px;
+  height: 450px;
+  box-shadow: -2px -2px 4px 2px rgba(0, 0, 0, 0.25),2px 2px 4px 2px rgba(255, 255, 255, 0.05);
+  padding:15px;
+  position: relative;
+  text-align:start;
+}
+section.cards-container div.trip-details-container img{
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+}
+section.cards-container div.trip-details-container img:hover{
+  transform: scale(1.1);
+}
+div.trip-details-container button.btn.btn-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, .75);
+}
+div.trip-details-container button.btn.btn-close:hover{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 1);
+}
+section.cards-container div.user-card-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 10px;
+  width: 400px;
+  height: fit-content;
+  box-shadow: -2px -2px 4px 2px rgba(0, 0, 0, 0.25),2px 2px 4px 2px rgba(255, 255, 255, 0.05);
+  padding:15px;
+  position: relative;
+  text-align:start;
+}
+section.cards-container div.user-card-item p,section.cards-container div.trip-details-container p{
+  width: 100%;
+  font-size: 15px;
+}
+section.cards-container div.user-card-item img{
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+}
+section.cards-container div.user-card-item img:hover{
+  transform: scale(1.2);
+}
+section.cards-container div.user-card-item button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 0.5);
+  padding: 5px;
+}
+section.cards-container div.user-card-item button:hover{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 1);
+}
+section.cards-container div.user-card-item button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 0, 0, 0.5);
+  padding: 5px;
+}
+section.feedback-cards-container{
+  padding: 50px;
+  gap: 20px;
+}
+section.feedback-cards-container div.feedback-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  height: fit-content;
+  min-height: 250px;
+  max-height: 400px;
+  position: relative;
+}
+section.feedback-cards-container div.feedback-card div{
+  width: 100%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows:repeat(2,25px);
+  gap: 10px;
+}
+section.feedback-cards-container div.feedback-card div img{
+  width: 50px;
+  aspect-ratio: 1;
+  display:inline;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border-radius: 50%;
+  border: 2px solid rgb(170, 170, 170);
+}
+section.feedback-cards-container div.feedback-card div h4{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+section.feedback-cards-container div.feedback-card div h5{
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: 15px;
+}
+section.feedback-cards-container div.feedback-card div:nth-child(2){
+  width: 100%;
+  opacity: .5;
+}
+section.feedback-cards-container div.feedback-card div:nth-child(2) span{
+  width: 100%;
+  text-align: start;
+  font-size: 12.5px;
+}
+section.feedback-cards-container div.feedback-card p{
+  width: 100%;
+  text-align: start;
+}
+footer{
+  backdrop-filter: blur(10px);
+}
+footer div svg:nth-child(1):hover{
+  filter: drop-shadow(0px 0px 5px var(--color-facebook));
+  transform: scale(1.25);
+}
+footer div svg:nth-child(2):hover{
+  filter: drop-shadow(0px 0px 5px var(--color-twitter));
+  transform: scale(1.25);
+}
+footer div svg:nth-child(3):hover{
+  filter: drop-shadow(0px 0px 5px var(--color-reddit));
+  transform: scale(1.25);
+}
+footer div svg:nth-child(4):hover{
+  filter: drop-shadow(0px 0px 5px var(--color-instagram));
+  transform: scale(1.25);
+}
+footer div svg:nth-child(5):hover{
+  filter: drop-shadow(0px 0px 5px var(--color-tiktok));
+  transform: scale(1.25);
+}
+footer div svg:nth-child(6):hover{
+  filter: drop-shadow(0px 0px 5px var(--color-whatsapp));
+  transform: scale(1.25);
+}
+main.error img{
+  mix-blend-mode: color-burn;
+}
+.mySwiper{
+  width: 900px;
+  height: 900px;
+}
+section.images-container{
+  width: 100vw;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+div.item{
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 20px;
+}
+div.item div.item-details{
+  position: absolute;
+  bottom: -50%;
+  right: 0;
+  width: 100%;
+  height: fit-content;
+  padding: 10px 15px;
+  backdrop-filter: blur(0px);
+  background: linear-gradient(0deg, #000000c4, transparent);
+}
+div.item:hover div.item-details{
+  transition:bottom .5s;
+  backdrop-filter: blur(10px);
+  bottom: 0;
+  transition-timing-function: ease-in-out;
+}
+div.item:not(:hover) div.item-details h3{
+  transform: translateX(-100%);
+}
+div.item:not(:hover) div.item-details p{
+  transform: translateX(-100%);
+}
+div.item:hover div.item-details h3{
+  transform: translateX(0%);
+  transition-delay: .5s;
+  transition-timing-function: ease-in-out;
+}
+div.item:hover div.item-details p{
+  transform: translateX(0%);
+  transition-delay: .75s;
+  transition-timing-function: ease-in-out;
+}
+div.item:not(:hover) div.item-details button.absolute-button{
+  transform: translateX(50%);
+}
+div.item:not(:hover) div.item-details button.btn-info{
+  transform: translateX(50%);
+}
+div.item:hover div.item-details button.absolute-button{
+  transform: translateX(0%);
+  transition-delay: .75s;
+  transition-timing-function: ease-in-out;
+}
+div.item:hover div.item-details button.btn-info{
+  transform: translateX(0%);
+  transition-delay: 1.5s;
+  transition-timing-function: ease-in-out;
+}
+div.item img{
+  width: 300px;
+  height: 300px;
+}
+div.item img:hover{
+  transform: scale(1.05);
+  transition-timing-function: ease-in-out;
+  transition: 1.5s;
+}
+div.item button.btn-info{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  padding: 2px;
+}
+div.item button.absolute-button{
+  position: absolute;
+  right: 10px;
+  bottom: 50px;
+  cursor: pointer;
+}
+div.item button svg.active path{
+  fill: #0d6efd;
+}
+section.dialog{
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  backdrop-filter: blur(15px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+section.dialog.shown{
+  clip-path: circle(100% at 50% 50%);
+}
+section.dialog.hidden{
+  clip-path: circle(0% at 50% 50%);
+}
+section.dialog > div{
+  width: 60%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-radius: 20px;
+  border: none;
+  position: relative;
+}
+section.dialog div button.remove-button{
+  position: absolute;
+  inset: auto;
+  bottom: 20px;
+}
+section.dialog div button.close-button{
+  position: absolute;
+  top: 100px;
+  right: 15px;
+  background-color: rgb(255, 0, 0);
+}
+section.hidden{
+  clip-path: circle(0% at 50% 50%);
+}
+div.file-upload-container:has(svg){
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div.file-upload-container:has(svg) input{
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+}
+div.file-upload-container:has(svg) svg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: auto;
+  z-index: 5;
+  pointer-events: none;
+}
+div.file-upload-container:has(svg):hover svg{
+  stroke: #0d6efd;
+}
+div.file-upload-container:has(svg):hover{
+  scale: 1.1;
+}
+form:has(div.images-container){
+  padding: 20px;
+}
+form div.images-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+form div.images-container div{
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  object-fit: cover;
+  overflow: hidden;
+}
+form div.images-container div img{
+  width: 250px;
+  height: 250px;
+}
+div.notification{
+  position: fixed;
+  bottom: 100px;
+  padding: 10px;
+  border-radius: 10px;
+}
+div.notification:not(.hidden){
+  right:0;
+}
+div.notification.hidden{
+  right:-300px;
+}
+div.dropdown-menu{
+  cursor: pointer;
+  transform: scaleY(0);
+}
+div.dropdown-menu.shown{
+  transform: scaleY(1);
+}
+div.dropdown-menu:not(.shown){
+  transform: scaleY(0);
+}
+div.dropdown-menu span{
+  cursor: pointer;
+}
+div.dropdown-menu span:hover{
+  background-color: #401F71;
+  color: azure;
+  padding-left: 20px;
+}
+div.text-box{
+  transform: scaleY(0) !important;
+  transform-origin:top;
+}
+div.text-box.shown{
+  transform: scaleY(1) !important;
+  transform-origin:top;
+}
+label.active{
+  transform: scale(.75) translateY(-10px) translateX(-10px);
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+label:not(.active){
+  transform: scale(1) translateY(0px) translateX(0);
+  background-color: transparent;
+  border-radius: 0;
+}
